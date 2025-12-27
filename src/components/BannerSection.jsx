@@ -1,0 +1,165 @@
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import './BannerSection.css';
+
+// Import TWO separate images - Before and After
+import beforeImage from '../assets/A9.1.webp';  // Dark/messy version
+import afterImage from '../assets/A9.webp';    // Clean/bright version
+
+gsap.registerPlugin(ScrollTrigger);
+
+function BannerSection() {
+  const [slidePosition, setSlidePosition] = useState(50); 
+  const [isDragging, setIsDragging] = useState(false);
+  const [animationComplete, setAnimationComplete] = useState(false);
+  const [sectionInView, setSectionInView] = useState(false);
+  
+  const sectionRef = useRef(null);
+  const headingRef = useRef(null);
+
+  useEffect(() => {
+    // Scoped GSAP context for better performance and cleanup
+    let ctx = gsap.context(() => {
+      
+      // ScrollTrigger to detect when section is in view
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: 'top 90%', 
+        end: 'bottom 10%',
+        onEnter: () => setSectionInView(true),
+        onLeave: () => setSectionInView(false),
+        onEnterBack: () => setSectionInView(true),
+        onLeaveBack: () => setSectionInView(false),
+      });
+
+      // Animate heading
+      gsap.fromTo(
+        headingRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: 0.2,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+            once: true
+          }
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert(); // Safely cleans up ONLY this section's triggers
+  }, []);
+
+  // Smooth automatic sliding animation logic
+  useEffect(() => {
+    let animationFrame;
+    let startTime;
+    const totalDuration = 6000; // Faster cycle for better UX
+    const cycles = 1;
+
+    const animate = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const elapsed = currentTime - startTime;
+
+      if (elapsed >= totalDuration) {
+        setSlidePosition(50);
+        setAnimationComplete(true);
+        return;
+      }
+
+      const progress = elapsed / totalDuration;
+      const sineValue = Math.sin(progress * Math.PI * 2 * cycles);
+      const position = 50 + (sineValue * 40); // Oscillate within a safe range
+      
+      setSlidePosition(position);
+      animationFrame = requestAnimationFrame(animate);
+    };
+
+    if (sectionInView && !isDragging && !animationComplete) {
+      animationFrame = requestAnimationFrame(animate);
+    }
+
+    return () => {
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+    };
+  }, [sectionInView, isDragging, animationComplete]);
+
+  const handleMove = useCallback((clientX) => {
+    const container = sectionRef.current?.querySelector('.banner-wrapper');
+    if (!container) return;
+    
+    const rect = container.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const percentage = (x / rect.width) * 100;
+    setSlidePosition(Math.min(Math.max(percentage, 0), 100));
+  }, []);
+
+  // Event listeners for dragging
+  useEffect(() => {
+    const onMouseMove = (e) => { if (isDragging) handleMove(e.clientX); };
+    const onTouchMove = (e) => { if (isDragging) handleMove(e.touches[0].clientX); };
+    const onStop = () => setIsDragging(false);
+
+    if (isDragging) {
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mouseup', onStop);
+      window.addEventListener('touchmove', onTouchMove, { passive: false });
+      window.addEventListener('touchend', onStop);
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onStop);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onStop);
+    };
+  }, [isDragging, handleMove]);
+
+  return (
+    <section className="banner-section" id="banner" ref={sectionRef}>
+      <div className="banner-wrapper">
+        {/* Before Layer */}
+        <div className="banner-layer layer-dark">
+          <img src={beforeImage} alt="Before" className="banner-img" />
+          <div className="banner-dark-filter"></div>
+        </div>
+
+        {/* Reveal/After Layer */}
+        <div 
+          className="banner-layer layer-reveal"
+          style={{ clipPath: `inset(0 ${100 - slidePosition}% 0 0)` }}
+        >
+          <img src={afterImage} alt="After" className="banner-img" />
+          <div className="banner-content">
+            <h2 className="banner-heading" ref={headingRef}>
+              A Place You Love to Return To
+            </h2>
+          </div>
+        </div>
+
+        {/* Slider Handle */}
+        <div 
+          className="banner-handle"
+          style={{ left: `${slidePosition}%` }}
+          onMouseDown={(e) => { e.preventDefault(); setIsDragging(true); setAnimationComplete(true); }}
+          onTouchStart={() => { setIsDragging(true); setAnimationComplete(true); }}
+        >
+          <div className="handle-line"></div>
+          <div className="handle-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+              <path d="M8 18l-6-6 6-6M16 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default BannerSection;

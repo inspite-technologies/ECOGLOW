@@ -1,0 +1,1353 @@
+/* ==================== BANNER SECTION BASE STYLES ==================== */
+
+.banner-section {
+  width: 100%;
+  height: 85vh;
+  min-height: 500px;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.banner-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  touch-action: none;
+}
+
+.banner-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center center;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  transform: none;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.banner-dark-filter {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1;
+}
+
+.layer-reveal {
+  z-index: 2;
+}
+
+.banner-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 90%;
+  text-align: center;
+  z-index: 5;
+  padding: 0 20px;
+}
+
+.banner-heading {
+  color: white;
+  font-size: 50px;
+  font-weight: 250;
+  letter-spacing: -0.5px;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  pointer-events: none;
+  line-height: 1.2;
+}
+
+.banner-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  margin-left: -30px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: ew-resize;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+.banner-handle:focus {
+  outline: 2px solid #73c9c1;
+  outline-offset: 4px;
+}
+
+.handle-line {
+  position: absolute;
+  width: 1.5px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.handle-circle {
+  width: 48px;
+  height: 48px;
+  background: #73c9c1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 101;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: grab;
+}
+
+.banner-handle:active .handle-circle {
+  cursor: grabbing;
+  transform: scale(1.1);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+}
+
+.handle-circle svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Mobile Instructions */
+.mobile-instruction {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background: #73c9c1;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  pointer-events: none;
+  animation: fadeInOut 3s ease-in-out infinite;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Desktop - Hide mobile instruction */
+@media (hover: hover) and (pointer: fine) {
+  .mobile-instruction {
+    display: none;
+  }
+}
+
+/* ==================== ULTRA-WIDE & 5K DISPLAYS ==================== */
+
+/* 27-inch iMac 5K / Studio Display (5120x2880) */
+@media (min-width: 5120px) {
+  .banner-section {
+    height: 90vh;
+    min-height: 1200px;
+  }
+
+  .banner-heading {
+    font-size: 145px;
+    letter-spacing: -1.5px;
+    line-height: 1.15;
+  }
+
+  .banner-content {
+    max-width: 85%;
+    padding: 0 60px;
+  }
+
+  .banner-handle {
+    width: 140px;
+    margin-left: -70px;
+  }
+
+  .handle-line {
+    width: 4px;
+  }
+
+  .handle-circle {
+    width: 115px;
+    height: 115px;
+  }
+
+  .handle-circle svg {
+    width: 52px;
+    height: 52px;
+  }
+
+  .mobile-instruction {
+    bottom: 70px;
+    padding: 24px 48px;
+    font-size: 30px;
+    border-radius: 60px;
+  }
+}
+
+/* 24-inch iMac 4.5K (4480x2520) */
+@media (min-width: 4480px) and (max-width: 5119px) {
+  .banner-section {
+    height: 88vh;
+    min-height: 1050px;
+  }
+
+  .banner-heading {
+    font-size: 128px;
+    letter-spacing: -1.3px;
+  }
+
+  .banner-content {
+    max-width: 86%;
+    padding: 0 54px;
+  }
+
+  .banner-handle {
+    width: 122px;
+    margin-left: -61px;
+  }
+
+  .handle-line {
+    width: 3.5px;
+  }
+
+  .handle-circle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .handle-circle svg {
+    width: 46px;
+    height: 46px;
+  }
+
+  .mobile-instruction {
+    bottom: 62px;
+    padding: 21px 42px;
+    font-size: 26px;
+    border-radius: 52px;
+  }
+}
+
+/* 16-inch MacBook Pro Retina (3456x2234) */
+@media (min-width: 3456px) and (max-width: 4479px) {
+  .banner-section {
+    height: 87vh;
+    min-height: 920px;
+  }
+
+  .banner-heading {
+    font-size: 112px;
+    letter-spacing: -1.1px;
+  }
+
+  .banner-content {
+    max-width: 87%;
+    padding: 0 48px;
+  }
+
+  .banner-handle {
+    width: 108px;
+    margin-left: -54px;
+  }
+
+  .handle-line {
+    width: 3px;
+  }
+
+  .handle-circle {
+    width: 88px;
+    height: 88px;
+  }
+
+  .handle-circle svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .mobile-instruction {
+    bottom: 56px;
+    padding: 19px 38px;
+    font-size: 24px;
+    border-radius: 48px;
+  }
+}
+
+/* 14-inch MacBook Pro Retina (3024x1964) */
+@media (min-width: 3024px) and (max-width: 3455px) {
+  .banner-section {
+    height: 86vh;
+    min-height: 820px;
+  }
+
+  .banner-heading {
+    font-size: 100px;
+    letter-spacing: -1px;
+  }
+
+  .banner-content {
+    max-width: 88%;
+    padding: 0 44px;
+  }
+
+  .banner-handle {
+    width: 96px;
+    margin-left: -48px;
+  }
+
+  .handle-line {
+    width: 2.8px;
+  }
+
+  .handle-circle {
+    width: 78px;
+    height: 78px;
+  }
+
+  .handle-circle svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mobile-instruction {
+    bottom: 50px;
+    padding: 17px 34px;
+    font-size: 21px;
+    border-radius: 44px;
+  }
+}
+
+/* 15-inch MacBook Retina (2880x1800) */
+@media (min-width: 2880px) and (max-width: 3023px) {
+  .banner-section {
+    height: 86vh;
+    min-height: 760px;
+  }
+
+  .banner-heading {
+    font-size: 92px;
+    letter-spacing: -0.9px;
+  }
+
+  .banner-content {
+    max-width: 88%;
+    padding: 0 42px;
+  }
+
+  .banner-handle {
+    width: 90px;
+    margin-left: -45px;
+  }
+
+  .handle-line {
+    width: 2.6px;
+  }
+
+  .handle-circle {
+    width: 74px;
+    height: 74px;
+  }
+
+  .handle-circle svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .mobile-instruction {
+    bottom: 48px;
+    padding: 16px 32px;
+    font-size: 20px;
+    border-radius: 42px;
+  }
+}
+
+/* 13-inch MacBook Retina (2560x1600) */
+@media (min-width: 2560px) and (max-width: 2879px) {
+  .banner-section {
+    height: 85vh;
+    min-height: 700px;
+  }
+
+  .banner-heading {
+    font-size: 84px;
+    letter-spacing: -0.8px;
+  }
+
+  .banner-content {
+    max-width: 88%;
+    padding: 0 40px;
+  }
+
+  .banner-handle {
+    width: 84px;
+    margin-left: -42px;
+  }
+
+  .handle-line {
+    width: 2.4px;
+  }
+
+  .handle-circle {
+    width: 68px;
+    height: 68px;
+  }
+
+  .handle-circle svg {
+    width: 31px;
+    height: 31px;
+  }
+
+  .mobile-instruction {
+    bottom: 45px;
+    padding: 15px 30px;
+    font-size: 19px;
+    border-radius: 40px;
+  }
+}
+
+/* ==================== EXTRA LARGE DESKTOP (1920px+) ==================== */
+
+@media (min-width: 1920px) and (max-width: 2559px) {
+  .banner-section {
+    height: 85vh;
+    min-height: 650px;
+  }
+
+  .banner-heading {
+    font-size: 78px;
+    letter-spacing: -0.8px;
+  }
+
+  .banner-content {
+    max-width: 88%;
+    padding: 0 38px;
+  }
+
+  .banner-handle {
+    width: 78px;
+    margin-left: -39px;
+  }
+
+  .handle-line {
+    width: 2.2px;
+  }
+
+  .handle-circle {
+    width: 64px;
+    height: 64px;
+  }
+
+  .handle-circle svg {
+    width: 29px;
+    height: 29px;
+  }
+
+  .mobile-instruction {
+    bottom: 42px;
+    padding: 14px 28px;
+    font-size: 18px;
+    border-radius: 38px;
+  }
+}
+
+/* ==================== LARGE DESKTOP (1728px - 1919px) ==================== */
+
+@media (min-width: 1728px) and (max-width: 1919px) {
+  .banner-section {
+    height: 85vh;
+    min-height: 600px;
+  }
+
+  .banner-heading {
+    font-size: 70px;
+    letter-spacing: -0.7px;
+  }
+
+  .banner-content {
+    max-width: 88%;
+    padding: 0 35px;
+  }
+
+  .banner-handle {
+    width: 72px;
+    margin-left: -36px;
+  }
+
+  .handle-line {
+    width: 2px;
+  }
+
+  .handle-circle {
+    width: 58px;
+    height: 58px;
+  }
+
+  .handle-circle svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .mobile-instruction {
+    bottom: 38px;
+    padding: 13px 26px;
+    font-size: 16px;
+    border-radius: 35px;
+  }
+}
+
+/* ==================== MEDIUM DESKTOP (1536px - 1727px) ==================== */
+
+@media (min-width: 1536px) and (max-width: 1727px) {
+  .banner-section {
+    height: 85vh;
+    min-height: 570px;
+  }
+
+  .banner-heading {
+    font-size: 65px;
+    letter-spacing: -0.65px;
+  }
+
+  .banner-content {
+    max-width: 89%;
+    padding: 0 32px;
+  }
+
+  .banner-handle {
+    width: 68px;
+    margin-left: -34px;
+  }
+
+  .handle-line {
+    width: 2px;
+  }
+
+  .handle-circle {
+    width: 55px;
+    height: 55px;
+  }
+
+  .handle-circle svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .mobile-instruction {
+    bottom: 36px;
+    padding: 12px 25px;
+    font-size: 15px;
+    border-radius: 33px;
+  }
+}
+
+/* ==================== MEDIUM DESKTOP (1440px - 1535px) ==================== */
+
+@media (min-width: 1440px) and (max-width: 1535px) {
+  .banner-section {
+    height: 85vh;
+    min-height: 540px;
+  }
+
+  .banner-heading {
+    font-size: 60px;
+    letter-spacing: -0.6px;
+  }
+
+  .banner-content {
+    max-width: 89%;
+    padding: 0 30px;
+  }
+
+  .banner-handle {
+    width: 64px;
+    margin-left: -32px;
+  }
+
+  .handle-line {
+    width: 1.8px;
+  }
+
+  .handle-circle {
+    width: 52px;
+    height: 52px;
+  }
+
+  .handle-circle svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .mobile-instruction {
+    bottom: 34px;
+    padding: 12px 24px;
+    font-size: 14px;
+    border-radius: 32px;
+  }
+}
+
+/* ==================== SMALL DESKTOP (1280px - 1439px) ==================== */
+
+@media (min-width: 1280px) and (max-width: 1439px) {
+  .banner-section {
+    height: 85vh;
+    min-height: 500px;
+  }
+
+  .banner-heading {
+    font-size: 55px;
+    letter-spacing: -0.55px;
+  }
+
+  .banner-content {
+    max-width: 90%;
+    padding: 0 28px;
+  }
+
+  .banner-handle {
+    width: 60px;
+    margin-left: -30px;
+  }
+
+  .handle-line {
+    width: 1.5px;
+  }
+
+  .handle-circle {
+    width: 48px;
+    height: 48px;
+  }
+
+  .handle-circle svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .mobile-instruction {
+    bottom: 32px;
+    padding: 11px 22px;
+    font-size: 13px;
+    border-radius: 30px;
+  }
+}
+
+/* ==================== TABLET LANDSCAPE (1024px - 1279px) ==================== */
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .banner-section {
+    height: 80vh;
+    min-height: 470px;
+  }
+
+  .banner-heading {
+    font-size: 52px;
+    letter-spacing: -0.5px;
+  }
+
+  .banner-content {
+    max-width: 90%;
+    padding: 0 26px;
+  }
+
+  .banner-handle {
+    width: 58px;
+    margin-left: -29px;
+  }
+
+  .handle-line {
+    width: 1.5px;
+  }
+
+  .handle-circle {
+    width: 46px;
+    height: 46px;
+  }
+
+  .handle-circle svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .mobile-instruction {
+    bottom: 30px;
+    padding: 10px 20px;
+    font-size: 12px;
+    border-radius: 28px;
+  }
+}
+
+/* ==================== TABLET (900px - 1023px) ==================== */
+
+@media (min-width: 900px) and (max-width: 1023px) {
+  .banner-section {
+    height: 78vh;
+    min-height: 450px;
+  }
+
+  .banner-heading {
+    font-size: 50px;
+    max-width: 88%;
+  }
+
+  .banner-content {
+    padding: 0 24px;
+  }
+
+  .banner-handle {
+    width: 56px;
+    margin-left: -28px;
+  }
+
+  .handle-circle {
+    width: 45px;
+    height: 45px;
+  }
+
+  .handle-circle svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .mobile-instruction {
+    bottom: 28px;
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+}
+
+/* ==================== TABLET PORTRAIT (834px - 899px) ==================== */
+
+@media (min-width: 834px) and (max-width: 899px) {
+  .banner-section {
+    height: 76vh;
+    min-height: 440px;
+  }
+
+  .banner-heading {
+    font-size: 48px;
+    max-width: 88%;
+  }
+
+  .banner-content {
+    padding: 0 22px;
+  }
+
+  .banner-handle {
+    width: 55px;
+    margin-left: -27.5px;
+  }
+
+  .handle-circle {
+    width: 44px;
+    height: 44px;
+  }
+
+  .handle-circle svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .mobile-instruction {
+    bottom: 27px;
+    padding: 9px 19px;
+    font-size: 12px;
+  }
+}
+
+/* ==================== TABLET PORTRAIT (768px - 833px) ==================== */
+
+@media (min-width: 768px) and (max-width: 833px) {
+  .banner-section {
+    height: 75vh;
+    min-height: 430px;
+  }
+
+  .banner-heading {
+    font-size: 46px;
+    max-width: 89%;
+    line-height: 1.25;
+  }
+
+  .banner-content {
+    padding: 0 20px;
+  }
+
+  .banner-handle {
+    width: 54px;
+    margin-left: -27px;
+  }
+
+  .handle-line {
+    width: 1.8px;
+  }
+
+  .handle-circle {
+    width: 43px;
+    height: 43px;
+  }
+
+  .handle-circle svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .mobile-instruction {
+    bottom: 26px;
+    padding: 9px 18px;
+    font-size: 11px;
+    border-radius: 26px;
+  }
+}
+
+/* ==================== LARGE MOBILE & SMALL TABLET (640px - 767px) ==================== */
+
+@media (min-width: 640px) and (max-width: 767px) {
+  .banner-section {
+    height: 70vh;
+    min-height: 410px;
+  }
+
+  .banner-heading {
+    font-size: 42px;
+    max-width: 90%;
+    line-height: 1.3;
+  }
+
+  .banner-content {
+    padding: 0 18px;
+  }
+
+  .banner-handle {
+    width: 65px;
+    margin-left: -32.5px;
+  }
+
+  .handle-line {
+    width: 2px;
+  }
+
+  .handle-circle {
+    width: 42px;
+    height: 42px;
+  }
+
+  .handle-circle svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .mobile-instruction {
+    bottom: 24px;
+    padding: 9px 18px;
+    font-size: 11px;
+    border-radius: 25px;
+  }
+}
+
+/* ==================== STANDARD MOBILE (576px - 639px) ==================== */
+
+@media (min-width: 576px) and (max-width: 639px) {
+  .banner-section {
+    height: 68vh;
+    min-height: 400px;
+  }
+
+  .banner-heading {
+    font-size: 40px;
+    max-width: 90%;
+  }
+
+  .banner-content {
+    padding: 0 17px;
+  }
+
+  .banner-handle {
+    width: 68px;
+    margin-left: -34px;
+  }
+
+  .handle-circle {
+    width: 42px;
+    height: 42px;
+  }
+
+  .mobile-instruction {
+    bottom: 23px;
+  }
+}
+
+/* ==================== MOBILE (480px - 575px) ==================== */
+
+@media (min-width: 480px) and (max-width: 575px) {
+  .banner-section {
+    height: 65vh;
+    min-height: 380px;
+  }
+
+  .banner-heading {
+    font-size: 36px;
+    max-width: 90%;
+    line-height: 1.3;
+    padding: 0 15px;
+  }
+
+  .banner-content {
+    padding: 0 15px;
+  }
+
+  .banner-handle {
+    width: 70px;
+    margin-left: -35px;
+  }
+
+  .handle-line {
+    width: 2.2px;
+  }
+
+  .handle-circle {
+    width: 42px;
+    height: 42px;
+  }
+
+  .handle-circle svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .mobile-instruction {
+    bottom: 22px;
+    padding: 8px 17px;
+    font-size: 11px;
+    border-radius: 24px;
+  }
+}
+
+/* ==================== MOBILE (428px - 479px) ==================== */
+
+@media (min-width: 428px) and (max-width: 479px) {
+  .banner-section {
+    height: 62vh;
+    min-height: 370px;
+  }
+
+  .banner-heading {
+    font-size: 34px;
+    line-height: 1.35;
+  }
+
+  .banner-content {
+    padding: 0 14px;
+  }
+
+  .banner-handle {
+    width: 72px;
+    margin-left: -36px;
+  }
+
+  .handle-circle {
+    width: 41px;
+    height: 41px;
+  }
+
+  .mobile-instruction {
+    bottom: 21px;
+  }
+}
+
+/* ==================== MOBILE (375px - 427px) ==================== */
+
+@media (min-width: 375px) and (max-width: 427px) {
+  .banner-section {
+    height: 60vh;
+    min-height: 360px;
+  }
+
+  .banner-heading {
+    font-size: 32px;
+    line-height: 1.35;
+    padding: 0 12px;
+  }
+
+  .banner-content {
+    padding: 0 12px;
+  }
+
+  .banner-handle {
+    width: 74px;
+    margin-left: -37px;
+  }
+
+  .handle-line {
+    width: 2.3px;
+  }
+
+  .handle-circle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .handle-circle svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .mobile-instruction {
+    bottom: 20px;
+    padding: 8px 16px;
+    font-size: 10px;
+    border-radius: 23px;
+  }
+}
+
+/* ==================== SMALL MOBILE (320px - 374px) ==================== */
+
+@media (min-width: 320px) and (max-width: 374px) {
+  .banner-section {
+    height: 58vh;
+    min-height: 340px;
+  }
+
+  .banner-heading {
+    font-size: 28px;
+    line-height: 1.4;
+    padding: 0 10px;
+  }
+
+  .banner-content {
+    padding: 0 10px;
+  }
+
+  .banner-handle {
+    width: 76px;
+    margin-left: -38px;
+  }
+
+  .handle-line {
+    width: 2.4px;
+  }
+
+  .handle-circle {
+    width: 38px;
+    height: 38px;
+  }
+
+  .handle-circle svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .mobile-instruction {
+    bottom: 18px;
+    padding: 7px 15px;
+    font-size: 10px;
+    border-radius: 22px;
+  }
+}
+
+/* ==================== EXTRA SMALL MOBILE (max-width: 319px) ==================== */
+
+@media (max-width: 319px) {
+  .banner-section {
+    height: 55vh;
+    min-height: 320px;
+  }
+
+  .banner-heading {
+    font-size: 24px;
+    line-height: 1.4;
+    padding: 0 8px;
+  }
+
+  .banner-content {
+    padding: 0 8px;
+  }
+
+  .banner-handle {
+    width: 78px;
+    margin-left: -39px;
+  }
+
+  .handle-line {
+    width: 2.5px;
+  }
+
+  .handle-circle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .handle-circle svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .mobile-instruction {
+    bottom: 16px;
+    padding: 6px 13px;
+    font-size: 9px;
+    border-radius: 20px;
+  }
+}
+
+/* ==================== SPECIFIC DEVICE OPTIMIZATIONS ==================== */
+
+/* iPhone SE and similar small devices */
+@media (max-width: 375px) and (max-height: 667px) {
+  .banner-section {
+    height: 60vh;
+    min-height: 350px;
+  }
+
+  .banner-heading {
+    font-size: 30px;
+  }
+}
+
+/* iPhone 12/13/14 Pro Max */
+@media (min-width: 428px) and (max-width: 430px) and (min-height: 926px) {
+  .banner-section {
+    height: 65vh;
+    min-height: 380px;
+  }
+
+  .banner-heading {
+    font-size: 36px;
+  }
+}
+
+/* iPad Mini Portrait */
+@media (min-width: 744px) and (max-width: 768px) and (orientation: portrait) {
+  .banner-section {
+    height: 72vh;
+    min-height: 420px;
+  }
+
+  .banner-heading {
+    font-size: 45px;
+  }
+}
+
+/* iPad Air/Pro Portrait */
+@media (min-width: 820px) and (max-width: 834px) and (orientation: portrait) {
+  .banner-section {
+    height: 74vh;
+    min-height: 430px;
+  }
+
+  .banner-heading {
+    font-size: 47px;
+  }
+}
+
+/* ==================== ORIENTATION & SPECIAL CASES ==================== */
+
+/* Landscape Mobile (All sizes) */
+@media (max-width: 768px) and (orientation: landscape) {
+  .banner-section {
+    height: 100vh;
+    min-height: 100vh;
+  }
+
+  .banner-heading {
+    font-size: 32px;
+    line-height: 1.3;
+  }
+
+  .banner-handle {
+    width: 65px;
+    margin-left: -32.5px;
+  }
+
+  .handle-circle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .handle-circle svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .mobile-instruction {
+    bottom: 15px;
+    padding: 7px 15px;
+    font-size: 10px;
+  }
+}
+
+/* Tablet Landscape */
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+  .banner-section {
+    height: 85vh;
+  }
+
+  .banner-heading {
+    font-size: 48px;
+  }
+}
+
+/* ==================== TOUCH DEVICE ENHANCEMENTS ==================== */
+
+/* Touch Devices - Larger hit areas */
+@media (hover: none) and (pointer: coarse) {
+  .banner-handle {
+    width: 80px !important;
+    margin-left: -40px !important;
+  }
+
+  .handle-circle {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .handle-circle svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  .mobile-instruction {
+    display: flex;
+  }
+
+  /* Ensure proper touch handling on smaller devices */
+  @media (max-width: 480px) {
+    .banner-handle {
+      width: 90px !important;
+      margin-left: -45px !important;
+    }
+
+    .handle-circle {
+      width: 48px !important;
+      height: 48px !important;
+    }
+  }
+}
+
+/* ==================== PERFORMANCE & ACCESSIBILITY ==================== */
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .handle-circle,
+  .mobile-instruction {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .banner-handle:active .handle-circle {
+    transform: none;
+  }
+
+  @keyframes fadeInOut {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 1; }
+  }
+}
+
+/* High DPI Displays (Retina) - All Mac screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .handle-line {
+    width: 2px;
+  }
+
+  .banner-heading {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .banner-img {
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* Very High DPI (3x Retina) */
+@media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 288dpi) {
+  .banner-img {
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .banner-dark-filter {
+    background: rgba(0, 0, 0, 0.65);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .banner-section {
+    height: auto;
+    min-height: auto;
+    page-break-inside: avoid;
+  }
+
+  .banner-handle,
+  .mobile-instruction,
+  .handle-line,
+  .handle-circle {
+    display: none;
+  }
+
+  .banner-content {
+    position: static;
+    transform: none;
+  }
+
+  .banner-dark-filter {
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ==================== BROWSER-SPECIFIC OPTIMIZATIONS ==================== */
+
+/* Safari-specific optimizations */
+@supports (-webkit-touch-callout: none) {
+  .banner-section {
+    height: -webkit-fill-available;
+  }
+
+  .banner-img {
+    -webkit-transform: translateZ(0);
+  }
+}
+
+/* Firefox-specific optimizations */
+@-moz-document url-prefix() {
+  .banner-heading {
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
