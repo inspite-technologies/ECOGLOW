@@ -193,23 +193,7 @@
 /* Modern viewport units for mobile browsers */
 @supports (height: 100dvh) {
   .banner-section {
-    height: 85dvh; /* Dynamic viewport height - adapts to address bar */
-  }
-}
-
-/* Fallback for older browsers */
-@supports not (height: 100dvh) {
-  @media (max-width: 768px) {
-    .banner-section {
-      height: calc(var(--vh, 1vh) * 85);
-    }
-  }
-}
-
-/* Safari-specific mobile fix */
-@supports (-webkit-touch-callout: none) {
-  .banner-section {
-    min-height: -webkit-fill-available;
+    height: 85dvh;
   }
 }
 
@@ -883,30 +867,22 @@
 
 /* ==================== MOBILE OPTIMIZATIONS (Below 768px) ==================== */
 
-/* CRITICAL FIX: Changed position from fixed to relative to prevent black overlay */
 @media (max-width: 767px) {
   .banner-section {
-    height: 100dvh;
-    min-height: 100dvh;
-    position: relative; /* Ensure it stays in document flow */
+    height: 65vh;
+    height: calc(var(--vh, 1vh) * 65);
+    min-height: 450px;
+    position: relative;
+    margin: 0;
+    padding: 0;
   }
 
-  /* Fallback for browsers without dvh support */
-  @supports not (height: 100dvh) {
-    .banner-section {
-      height: 100vh;
-      min-height: 100vh;
-    }
-  }
-
-  /* FIXED: Changed from position: fixed to position: relative */
   .banner-wrapper {
-    position: relative; /* ← KEY FIX: Prevents black overlay on other sections */
+    position: relative;
     width: 100%;
     height: 100%;
   }
 
-  /* Larger touch targets */
   .banner-handle {
     width: 90px !important;
     margin-left: -45px !important;
@@ -925,15 +901,31 @@
   .handle-line {
     width: 3px !important;
   }
+
+  /* Better text size - one line */
+  .banner-heading {
+    font-size: 26px !important;
+    font-weight: 300;
+    white-space: nowrap;
+    max-width: 95%;
+  }
+
+  .mobile-instruction {
+    bottom: 80px;
+  }
 }
 
 /* ==================== LARGE MOBILE & SMALL TABLET (640px - 767px) ==================== */
 
 @media (min-width: 640px) and (max-width: 767px) {
+  .banner-section {
+    height: 60vh;
+    min-height: 480px;
+  }
+
   .banner-heading {
-    font-size: 40px;
-    max-width: 90%;
-    line-height: 1.3;
+    font-size: 32px !important;
+    white-space: nowrap;
   }
 
   .banner-content {
@@ -941,7 +933,7 @@
   }
 
   .mobile-instruction {
-    bottom: 40px;
+    bottom: 80px;
     padding: 12px 24px;
     font-size: 13px;
     border-radius: 25px;
@@ -951,9 +943,14 @@
 /* ==================== STANDARD MOBILE (576px - 639px) ==================== */
 
 @media (min-width: 576px) and (max-width: 639px) {
+  .banner-section {
+    height: 58vh;
+    min-height: 450px;
+  }
+
   .banner-heading {
-    font-size: 38px;
-    max-width: 90%;
+    font-size: 30px !important;
+    white-space: nowrap;
   }
 
   .banner-content {
@@ -961,7 +958,7 @@
   }
 
   .mobile-instruction {
-    bottom: 38px;
+    bottom: 75px;
     padding: 12px 24px;
     font-size: 13px;
   }
@@ -970,10 +967,14 @@
 /* ==================== MOBILE (480px - 575px) ==================== */
 
 @media (min-width: 480px) and (max-width: 575px) {
+  .banner-section {
+    height: 58vh;
+    min-height: 420px;
+  }
+
   .banner-heading {
-    font-size: 35px;
-    max-width: 90%;
-    line-height: 1.3;
+    font-size: 28px !important;
+    white-space: nowrap;
     padding: 0 15px;
   }
 
@@ -982,19 +983,24 @@
   }
 
   .mobile-instruction {
-    bottom: 36px;
+    bottom: 70px;
     padding: 11px 22px;
     font-size: 12px;
     border-radius: 24px;
   }
 }
 
-/* ==================== MOBILE (428px - 479px) ==================== */
+/* ==================== MOBILE (428px - 479px) - iPhone 12/13 Pro Max ==================== */
 
 @media (min-width: 428px) and (max-width: 479px) {
+  .banner-section {
+    height: 58vh;
+    min-height: 400px;
+  }
+
   .banner-heading {
-    font-size: 33px;
-    line-height: 1.35;
+    font-size: 26px !important;
+    white-space: nowrap;
   }
 
   .banner-content {
@@ -1002,18 +1008,23 @@
   }
 
   .mobile-instruction {
-    bottom: 35px;
+    bottom: 70px;
     padding: 11px 22px;
     font-size: 12px;
   }
 }
 
-/* ==================== MOBILE (375px - 427px) ==================== */
+/* ==================== MOBILE (375px - 427px) - iPhone SE, iPhone 12/13 mini ==================== */
 
 @media (min-width: 375px) and (max-width: 427px) {
+  .banner-section {
+    height: 58vh;
+    min-height: 380px;
+  }
+
   .banner-heading {
-    font-size: 30px;
-    line-height: 1.35;
+    font-size: 24px !important;
+    white-space: nowrap;
     padding: 0 12px;
   }
 
@@ -1022,7 +1033,7 @@
   }
 
   .mobile-instruction {
-    bottom: 34px;
+    bottom: 65px;
     padding: 10px 20px;
     font-size: 11px;
     border-radius: 23px;
@@ -1032,9 +1043,14 @@
 /* ==================== SMALL MOBILE (320px - 374px) ==================== */
 
 @media (min-width: 320px) and (max-width: 374px) {
+  .banner-section {
+    height: 55vh;
+    min-height: 360px;
+  }
+
   .banner-heading {
-    font-size: 26px;
-    line-height: 1.4;
+    font-size: 22px !important;
+    white-space: nowrap;
     padding: 0 10px;
   }
 
@@ -1043,7 +1059,7 @@
   }
 
   .mobile-instruction {
-    bottom: 32px;
+    bottom: 60px;
     padding: 10px 20px;
     font-size: 11px;
     border-radius: 22px;
@@ -1053,9 +1069,14 @@
 /* ==================== EXTRA SMALL MOBILE (max-width: 319px) ==================== */
 
 @media (max-width: 319px) {
+  .banner-section {
+    height: 55vh;
+    min-height: 340px;
+  }
+
   .banner-heading {
-    font-size: 22px;
-    line-height: 1.4;
+    font-size: 20px !important;
+    white-space: nowrap;
     padding: 0 8px;
   }
 
@@ -1064,7 +1085,7 @@
   }
 
   .mobile-instruction {
-    bottom: 30px;
+    bottom: 60px;
     padding: 9px 18px;
     font-size: 10px;
     border-radius: 20px;
@@ -1076,33 +1097,22 @@
 /* Landscape Mobile (All sizes) */
 @media (max-width: 768px) and (orientation: landscape) {
   .banner-section {
-    height: 100vh !important;
-    min-height: 100vh !important;
+    height: 90vh !important;
+    height: calc(var(--vh, 1vh) * 90) !important;
+    min-height: 350px !important;
   }
 
   .banner-heading {
-    font-size: 28px;
-    line-height: 1.3;
+    font-size: 24px !important;
+    white-space: nowrap;
   }
 
   .mobile-instruction {
-    bottom: 20px;
+    bottom: 50px;
     padding: 8px 16px;
     font-size: 10px;
   }
 }
-
-/* Tablet Landscape */
-@media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
-  .banner-section {
-    height: 85vh;
-  }
-
-  .banner-heading {
-    font-size: 46px;
-  }
-}
-
 /* ==================== TOUCH DEVICE ENHANCEMENTS ==================== */
 
 /* Touch Devices - Larger hit areas */
@@ -1197,13 +1207,23 @@
 
 /* ==================== BROWSER-SPECIFIC OPTIMIZATIONS ==================== */
 
-/* Safari-specific optimizations - UPDATED */
+/* Safari iOS fix */
 @supports (-webkit-touch-callout: none) {
+  @media (max-width: 767px) {
+    .banner-section {
+      height: -webkit-fill-available;
+      min-height: -webkit-fill-available;
+    }
+
+    .banner-wrapper {
+      height: -webkit-fill-available;
+      min-height: -webkit-fill-available;
+    }
+  }
+
   .banner-img {
     -webkit-transform: translateZ(0);
   }
-
-  /* REMOVED: The problematic position: fixed rule that was causing overlay */
 }
 
 /* Firefox-specific optimizations */

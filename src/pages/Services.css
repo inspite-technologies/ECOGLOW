@@ -1,8 +1,90 @@
 @import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
+
+/* --- SERVICE HERO SECTION (MATCHING PACKAGES STYLE) --- */
+.service-hero {
+  height: 40vh;
+  min-height: 350px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 0px 0 120px 15%;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.159), rgba(0, 0, 0, 0.17));
+  z-index: 1;
+}
+
+.service-hero .hero-title {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.service-text {
+  font-size: 1rem;
+  font-weight: 450;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  letter-spacing: 0.3px;
+  font-family: "Montserrat", sans-serif;
+  opacity: 0.95;
+  display: block;
+}
+
+.service-hero .brand-text {
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  font-family: "Montserrat", sans-serif;
+  display: block;
+}
+
+/* --- SERVICE INTRO / BREADCRUMB (MATCHING PACKAGES STYLE) --- */
+.service-intro {
+  padding: 45px 15%;
+  background: white;
+}
+
+.service-intro .hero-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero-breadcrumb span:first-child {
+  color: #80cbc4;
+}
+
+.hero-breadcrumb span:last-child {
+  color: #000000;
+}
 
 /* --- RESIDENTIAL SECTION (2 COLUMNS) --- */
 .residential-section {
-  padding: 80px 10%; /* Desktop Padding */
+  padding: 80px 10%;
   background: white;
 }
 
@@ -74,10 +156,9 @@
 }
 
 /* --- LAPTOP & TABLET VIEW (MACBOOK FIX) --- */
-/* CHANGED: Increased from 1024px to 1440px so this applies to MacBook Air/Pro */
 @media (max-width: 1440px) {
   .residential-section {
-    padding: 60px 5%; /* Tighter padding for laptops */
+    padding: 60px 5%;
   }
   
   .residential-section .container {
@@ -87,6 +168,15 @@
   
   .residential-section .title {
     font-size: 42px;
+  }
+  
+  .service-hero {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  
+  .service-intro {
+    padding: 45px 10%;
   }
 }
 
@@ -109,6 +199,34 @@
   
   .title-underline {
    margin-top: 10px !important;
+  }
+  
+  .service-hero {
+    min-height: 300px;
+    padding: 0 20px 80px 20px;
+  }
+  
+  .service-hero .brand-text {
+    font-size: 2.5rem;
+  }
+  
+  .service-intro {
+    padding: 35px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-hero {
+    min-height: 280px;
+    padding-bottom: 70px;
+  }
+  
+  .service-hero .brand-text {
+    font-size: 2rem;
+  }
+  
+  .service-text {
+    font-size: 0.9rem;
   }
 }
 
@@ -181,7 +299,6 @@
     white-space: nowrap; 
   }
 }
-
 /* --- LUXURY SECTION --- */
 .residential-luxury-section {
   background: #7dd3c0;
@@ -199,14 +316,18 @@
   color: white;
   margin-bottom: 20px;
   letter-spacing: 0.02em;
+  text-align: center !important; /* Added !important to force center */
+  width: 100%; /* Ensure full width */
+  display: block; /* Ensure block display */
 }
 
 .section-header p {
-  font-size: clamp(0.95rem, 1.5vw, 0.5rem);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
   color: rgba(255, 255, 255, 0.95);
   font-weight: 300;
   max-width: 800px;
   margin: 0 auto;
+  text-align: center !important; /* Added !important to force center */
 }
 
 .content-grid {
@@ -216,7 +337,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 0;
   align-items: stretch;
-  padding-left: 10%; /* Heavy indent for Desktop */
+  padding-left: 10%;
 }
 
 .content-grid:last-child {
@@ -272,7 +393,7 @@
 }
 
 .text-side p {
-  font-size: clamp(0.9rem, 1.2vw, 0rem);
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
   line-height: 1.6;
   color: rgba(241, 241, 241, 0.95);
   margin-bottom: 35px;
@@ -344,15 +465,22 @@
 }
 
 /* --- ADDED: MACBOOK SPECIFIC FIX (1025px - 1440px) --- */
-/* Keeps 2 columns but fixes the heavy indentation */
 @media (min-width: 1025px) and (max-width: 1440px) {
   .content-grid {
-    padding-left: 0; /* Remove the 10% indent on laptops so it fits */
-    gap: 30px; /* Add some breathing room */
+    padding-left: 0;
+    gap: 30px;
   }
   
   .content-grid.row-reverse .text-side {
-    padding-left: 0; /* Reset for reverse rows too */
+    padding-left: 0;
+  }
+  
+  .service-hero {
+    padding-left: 10%;
+  }
+  
+  .service-intro {
+    padding: 45px 10%;
   }
 }
 
@@ -365,19 +493,27 @@
 
   .text-side {
     padding: 50px 40px;
-    margin-left: 0; /* Reset margin on stack */
+    margin-left: 0;
   }
   
-  /* Reset spacing for stacked reverse grid */
   .content-grid.row-reverse .text-side {
     margin-right: 0;
-    padding-left: 50px; /* Standard padding */
+    padding-left: 50px;
   }
 
   .image-side {
     min-height: 400px;
     order: -1;
-    max-width: 100%; /* Full width on stack */
+    max-width: 100%;
+  }
+  
+  .service-hero {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  
+  .service-intro {
+    padding: 45px 5%;
   }
 }
 
@@ -536,9 +672,6 @@
 }
 
 /* --- CHANGED: NEWSLETTER STACK POINT --- */
-/* Increased from 1024px to 1280px. 
-   On a 13" MacBook, the side-by-side newsletter often looks squashed. 
-   This forces it to stack cleanly on small laptops. */
 @media (max-width: 1280px) {
   .newsletter-container {
     grid-template-columns: 1fr;

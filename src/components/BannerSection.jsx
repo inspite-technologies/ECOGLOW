@@ -3,9 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './BannerSection.css';
 
-// Import TWO separate images - Before and After
-import beforeImage from '../assets/A9.1.webp';  // Dark/messy version
-import afterImage from '../assets/A9.webp';    // Clean/bright version
+import beforeImage from '../assets/A9.1.webp';
+import afterImage from '../assets/A9.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,6 +19,23 @@ function BannerSection() {
   const headingRef = useRef(null);
   const animationFrameRef = useRef(null);
 
+  // FIX: Set viewport height for mobile browsers
+  useEffect(() => {
+    const setVH = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    setVH();
+    window.addEventListener('resize', setVH);
+    window.addEventListener('orientationchange', setVH);
+
+    return () => {
+      window.removeEventListener('resize', setVH);
+      window.removeEventListener('orientationchange', setVH);
+    };
+  }, []);
+
   // Detect mobile on mount and resize
   useEffect(() => {
     const checkMobile = () => {
@@ -33,10 +49,8 @@ function BannerSection() {
   }, []);
 
   useEffect(() => {
-    // Scoped GSAP context for better performance and cleanup
     let ctx = gsap.context(() => {
       
-      // ScrollTrigger to detect when section is in view
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: 'top 90%', 
@@ -47,7 +61,6 @@ function BannerSection() {
         onLeaveBack: () => setSectionInView(false),
       });
 
-      // Animate heading
       gsap.fromTo(
         headingRef.current,
         { opacity: 0, y: 30 },
@@ -67,12 +80,11 @@ function BannerSection() {
       );
     }, sectionRef);
 
-    return () => ctx.revert(); // Safely cleans up ONLY this section's triggers
+    return () => ctx.revert();
   }, []);
 
-  // Smooth automatic sliding animation logic
   useEffect(() => {
-    const totalDuration = 6000; // Faster cycle for better UX
+    const totalDuration = 6000;
     const cycles = 1;
     let startTime;
 
@@ -88,7 +100,7 @@ function BannerSection() {
 
       const progress = elapsed / totalDuration;
       const sineValue = Math.sin(progress * Math.PI * 2 * cycles);
-      const position = 50 + (sineValue * 40); // Oscillate within a safe range
+      const position = 50 + (sineValue * 40);
       
       setSlidePosition(position);
       animationFrameRef.current = requestAnimationFrame(animate);
@@ -115,7 +127,6 @@ function BannerSection() {
     setSlidePosition(Math.min(Math.max(percentage, 0), 100));
   }, []);
 
-  // Event listeners for dragging
   useEffect(() => {
     const onMouseMove = (e) => { 
       if (isDragging) {
@@ -159,7 +170,6 @@ function BannerSection() {
   return (
     <section className="banner-section" id="banner" ref={sectionRef}>
       <div className="banner-wrapper">
-        {/* Before Layer */}
         <div className="banner-layer layer-dark">
           <div className="banner-img-container">
             <img src={beforeImage} alt="Before" className="banner-img" draggable="false" />
@@ -167,7 +177,6 @@ function BannerSection() {
           <div className="banner-dark-filter"></div>
         </div>
 
-        {/* Reveal/After Layer */}
         <div 
           className="banner-layer layer-reveal"
           style={{ clipPath: `inset(0 ${100 - slidePosition}% 0 0)` }}
@@ -182,7 +191,6 @@ function BannerSection() {
           </div>
         </div>
 
-        {/* Slider Handle */}
         <div 
           className="banner-handle"
           style={{ left: `${slidePosition}%` }}
@@ -203,12 +211,11 @@ function BannerSection() {
           </div>
         </div>
 
-        {/* Mobile Instruction */}
-        {isMobile && !animationComplete && (
+        {/* {isMobile && !animationComplete && (
           <div className="mobile-instruction">
             Drag to Compare
           </div>
-        )}
+        )} */}
       </div>
     </section>
   );

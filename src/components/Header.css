@@ -1570,14 +1570,20 @@ body.mobile-menu-open {
 
 /* ==================== MOBILE BREAKPOINT ==================== */
 
-/* Switch to hamburger menu at 767px and below */
 @media (max-width: 767px) {
   .main-header {
     height: 70px;
+    background: white !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .main-header::after {
+    background: rgba(0, 0, 0, 0.08);
   }
 
   .main-header.scrolled {
     height: 70px;
+    background: white !important;
   }
 
   .header-container {
@@ -1589,23 +1595,28 @@ body.mobile-menu-open {
     margin-right: 0;
   }
 
-  /* Hide desktop navigation */
   .nav-links {
     display: none;
   }
 
-  /* Show mobile menu toggle */
   .mobile-menu-toggle {
     display: flex;
   }
 
-  /* Show mobile navigation */
+  .mobile-menu-toggle .menu-icon {
+    color: #333 !important;
+  }
+
+  .mobile-menu-toggle.active .menu-icon {
+    color: #80cbc4;
+  }
+
   .mobile-nav {
     display: block;
     top: 70px;
+    background: white;
   }
 
-  /* Adjust header actions for mobile */
   .header-actions .book-btn {
     display: none;
   }
@@ -1625,10 +1636,21 @@ body.mobile-menu-open {
   .icon-circle {
     width: 32px;
     height: 32px;
+    border-color: rgba(0, 0, 0, 0.2) !important;
   }
 
   .icon-circle i {
     font-size: 15px !important;
+    color: #333 !important;
+  }
+
+  .icon-circle.whatsapp {
+    background: #25D366 !important;
+    border: none !important;
+  }
+
+  .icon-circle.whatsapp i {
+    color: white !important;
   }
 
   .mobile-nav-links > a,
@@ -1648,7 +1670,6 @@ body.mobile-menu-open {
     font-size: 14px;
   }
 }
-
 /* ==================== LARGE MOBILE & SMALL TABLET (640px - 767px) ==================== */
 
 @media (min-width: 640px) and (max-width: 767px) {
