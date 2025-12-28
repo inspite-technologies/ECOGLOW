@@ -1577,10 +1577,17 @@ body.page-mobile-menu-open {
 @media (max-width: 767px) {
   .page-main-header {
     height: 70px;
+    background: white !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .page-main-header::after {
+    background: rgba(0, 0, 0, 0.08) !important;
   }
 
   .page-main-header.page-scrolled {
     height: 70px;
+    background: white !important;
   }
 
   .page-header-container {
@@ -1600,9 +1607,22 @@ body.page-mobile-menu-open {
     display: flex;
   }
 
+  .page-mobile-menu-toggle .page-menu-icon {
+    color: #333 !important;
+  }
+
+  .page-mobile-menu-toggle.active {
+    background: rgba(128, 203, 196, 0.15);
+  }
+
+  .page-mobile-menu-toggle.active .page-menu-icon {
+    color: #80cbc4;
+  }
+
   .page-mobile-nav {
     display: block;
     top: 70px;
+    background: white !important;
   }
 
   .page-header-actions .page-book-btn {
@@ -1624,10 +1644,21 @@ body.page-mobile-menu-open {
   .page-icon-circle {
     width: 32px;
     height: 32px;
+    border-color: rgba(0, 0, 0, 0.2) !important;
   }
 
   .page-icon-circle i {
     font-size: 15px !important;
+    color: #333 !important;
+  }
+
+  .page-icon-circle.page-whatsapp {
+    background: #25D366 !important;
+    border: none !important;
+  }
+
+  .page-icon-circle.page-whatsapp i {
+    color: white !important;
   }
 }
 
@@ -2130,46 +2161,113 @@ body.page-mobile-menu-open {
   }
 }
 
-/* Dark Mode Support */
+/* Dark Mode Support - FIXED FOR MOBILE */
 @media (prefers-color-scheme: dark) {
-  .page-mobile-nav {
-    background: #1a1a1a;
+  /* Only apply dark mode on DESKTOP (768px and above) */
+  @media (min-width: 768px) {
+    .page-mobile-nav {
+      background: #1a1a1a;
+    }
+
+    .page-mobile-nav-links > a,
+    .page-mobile-services-toggle {
+      color: #e0e0e0;
+      border-bottom-color: #333;
+    }
+
+    .page-mobile-nav-links > a:hover,
+    .page-mobile-services-toggle:hover {
+      background: #2a2a2a;
+    }
+
+    .page-mobile-services-menu {
+      background: #222;
+    }
+
+    .page-mobile-services-menu a {
+      color: #b0b0b0;
+      border-bottom-color: #333;
+    }
+
+    .page-mobile-social-section {
+      border-top-color: #333;
+    }
+
+    .page-mobile-social-link {
+      color: #e0e0e0;
+      border-bottom-color: #333;
+    }
+
+    .page-mobile-social-link:hover {
+      background: #2a2a2a;
+    }
   }
 
-  .page-mobile-nav-links > a,
-  .page-mobile-services-toggle {
-    color: #e0e0e0;
-    border-bottom-color: #333;
-  }
+  /* FORCE WHITE on mobile even in dark mode */
+  @media (max-width: 767px) {
+    .page-main-header {
+      background: white !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    }
 
-  .page-mobile-nav-links > a:hover,
-  .page-mobile-services-toggle:hover {
-    background: #2a2a2a;
-  }
+    .page-main-header::after {
+      background: rgba(0, 0, 0, 0.08) !important;
+    }
 
-  .page-mobile-services-menu {
-    background: #222;
-  }
+    .page-mobile-nav {
+      background: white !important;
+    }
 
-  .page-mobile-services-menu a {
-    color: #b0b0b0;
-    border-bottom-color: #333;
-  }
+    .page-mobile-nav-links > a,
+    .page-mobile-services-toggle {
+      color: #333 !important;
+      border-bottom-color: #f0f0f0 !important;
+    }
 
-  .page-mobile-social-section {
-    border-top-color: #333;
-  }
+    .page-mobile-services-menu {
+      background: #f9f9f9 !important;
+    }
 
-  .page-mobile-social-link {
-    color: #e0e0e0;
-    border-bottom-color: #333;
-  }
+    .page-mobile-services-menu a {
+      color: #555 !important;
+      border-bottom-color: #e5e5e5 !important;
+    }
 
-  .page-mobile-social-link:hover {
-    background: #2a2a2a;
+    .page-mobile-social-link {
+      color: #333 !important;
+      border-bottom-color: #f0f0f0 !important;
+    }
+
+    .page-mobile-social-link.page-whatsapp {
+      color: #25D366 !important;
+    }
+
+    .page-mobile-social-link.page-phone {
+      color: #14b8a6 !important;
+    }
+
+    .page-mobile-menu-toggle .page-menu-icon {
+      color: #333 !important;
+    }
+
+    .page-icon-circle {
+      border-color: rgba(0, 0, 0, 0.2) !important;
+    }
+
+    .page-icon-circle i {
+      color: #333 !important;
+    }
+
+    .page-icon-circle.page-whatsapp {
+      background: #25D366 !important;
+      border: none !important;
+    }
+
+    .page-icon-circle.page-whatsapp i {
+      color: white !important;
+    }
   }
 }
-
 /* Print Styles */
 @media print {
   .page-main-header {
