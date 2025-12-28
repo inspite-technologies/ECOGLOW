@@ -1876,41 +1876,69 @@
   }
 }
 
-/* Dark Mode Support */
+/* Dark Mode Support - FIXED FOR MOBILE */
 @media (prefers-color-scheme: dark) {
-  .unified-footer-section {
-    background: #1a1a1a !important;
+  /* Only apply dark mode on DESKTOP, not mobile */
+  @media (min-width: 768px) {
+    .unified-footer-section {
+      background: #1a1a1a !important;
+    }
+
+    .section-heading-thin {
+      color: #ffffff;
+    }
+
+    .message-text,
+    .connect-subtitle,
+    .md-name-label {
+      color: #e0e0e0;
+    }
+
+    .handwritten-signature {
+      color: #ffffff;
+    }
+
+    .section-divider {
+      background-color: #444;
+    }
+
+    .newsletter-input {
+      background: #2a2a2a;
+      color: #ffffff;
+      border-color: #555;
+    }
+
+    .newsletter-input::placeholder {
+      color: #888;
+    }
   }
 
-  .section-heading-thin {
-    color: #ffffff;
-  }
+  /* FORCE WHITE on mobile even in dark mode */
+  @media (max-width: 767px) {
+    .unified-footer-section {
+      background: #ffffff !important;
+    }
 
-  .message-text,
-  .connect-subtitle,
-  .md-name-label {
-    color: #e0e0e0;
-  }
+    .section-heading-thin {
+      color: #131313 !important;
+    }
 
-  .handwritten-signature {
-    color: #ffffff;
-  }
+    .message-text,
+    .connect-subtitle,
+    .md-name-label {
+      color: #3b3b3b !important;
+    }
 
-  .section-divider {
-    background-color: #444;
-  }
+    .handwritten-signature {
+      color: #000000 !important;
+    }
 
-  .newsletter-input {
-    background: #2a2a2a;
-    color: #ffffff;
-    border-color: #555;
-  }
-
-  .newsletter-input::placeholder {
-    color: #888;
+    .newsletter-input {
+      background: white !important;
+      color: #1e1d1d !important;
+    }
   }
 }
-
 /* Print Styles */
 @media print {
   .unified-footer-section {

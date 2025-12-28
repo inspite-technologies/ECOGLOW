@@ -1614,7 +1614,7 @@ body.mobile-menu-open {
   .mobile-nav {
     display: block;
     top: 70px;
-    background: white;
+    background: white !important;
   }
 
   .header-actions .book-btn {
@@ -2169,43 +2169,62 @@ body.mobile-menu-open {
   }
 }
 
-/* Dark Mode Support */
+/* Dark Mode Support - FIXED FOR MOBILE */
 @media (prefers-color-scheme: dark) {
-  .mobile-nav {
-    background: #1a1a1a;
+  /* Only apply dark mode on DESKTOP */
+  @media (min-width: 768px) {
+    .mobile-nav {
+      background: #1a1a1a;
+    }
+
+    .mobile-nav-links > a,
+    .mobile-services-toggle {
+      color: #e0e0e0;
+      border-bottom-color: #333;
+    }
+
+    .mobile-nav-links > a:hover,
+    .mobile-services-toggle:hover {
+      background: #2a2a2a;
+    }
+
+    .mobile-services-menu {
+      background: #222;
+    }
+
+    .mobile-services-menu a {
+      color: #b0b0b0;
+      border-bottom-color: #333;
+    }
+
+    .mobile-social-section {
+      border-top-color: #333;
+    }
+
+    .mobile-social-link {
+      color: #e0e0e0;
+      border-bottom-color: #333;
+    }
+
+    .mobile-social-link:hover {
+      background: #2a2a2a;
+    }
   }
 
-  .mobile-nav-links > a,
-  .mobile-services-toggle {
-    color: #e0e0e0;
-    border-bottom-color: #333;
-  }
+  /* FORCE WHITE on mobile even in dark mode */
+  @media (max-width: 767px) {
+    .main-header {
+      background: white !important;
+    }
 
-  .mobile-nav-links > a:hover,
-  .mobile-services-toggle:hover {
-    background: #2a2a2a;
-  }
+    .mobile-nav {
+      background: white !important;
+    }
 
-  .mobile-services-menu {
-    background: #222;
-  }
-
-  .mobile-services-menu a {
-    color: #b0b0b0;
-    border-bottom-color: #333;
-  }
-
-  .mobile-social-section {
-    border-top-color: #333;
-  }
-
-  .mobile-social-link {
-    color: #e0e0e0;
-    border-bottom-color: #333;
-  }
-
-  .mobile-social-link:hover {
-    background: #2a2a2a;
+    .mobile-nav-links > a,
+    .mobile-services-toggle {
+      color: #333 !important;
+    }
   }
 }
 
