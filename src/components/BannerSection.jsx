@@ -14,9 +14,23 @@ function BannerSection() {
   const [isDragging, setIsDragging] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(false);
   const [sectionInView, setSectionInView] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
+  const animationFrameRef = useRef(null);
+
+  // Detect mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     // Scoped GSAP context for better performance and cleanup
@@ -58,10 +72,9 @@ function BannerSection() {
 
   // Smooth automatic sliding animation logic
   useEffect(() => {
-    let animationFrame;
-    let startTime;
     const totalDuration = 6000; // Faster cycle for better UX
     const cycles = 1;
+    let startTime;
 
     const animate = (currentTime) => {
       if (!startTime) startTime = currentTime;
@@ -78,15 +91,17 @@ function BannerSection() {
       const position = 50 + (sineValue * 40); // Oscillate within a safe range
       
       setSlidePosition(position);
-      animationFrame = requestAnimationFrame(animate);
+      animationFrameRef.current = requestAnimationFrame(animate);
     };
 
     if (sectionInView && !isDragging && !animationComplete) {
-      animationFrame = requestAnimationFrame(animate);
+      animationFrameRef.current = requestAnimationFrame(animate);
     }
 
     return () => {
-      if (animationFrame) cancelAnimationFrame(animationFrame);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
     };
   }, [sectionInView, isDragging, animationComplete]);
 
@@ -102,8 +117,20 @@ function BannerSection() {
 
   // Event listeners for dragging
   useEffect(() => {
-    const onMouseMove = (e) => { if (isDragging) handleMove(e.clientX); };
-    const onTouchMove = (e) => { if (isDragging) handleMove(e.touches[0].clientX); };
+    const onMouseMove = (e) => { 
+      if (isDragging) {
+        e.preventDefault();
+        handleMove(e.clientX); 
+      }
+    };
+    
+    const onTouchMove = (e) => { 
+      if (isDragging) {
+        e.preventDefault();
+        handleMove(e.touches[0].clientX); 
+      }
+    };
+    
     const onStop = () => setIsDragging(false);
 
     if (isDragging) {
@@ -121,12 +148,22 @@ function BannerSection() {
     };
   }, [isDragging, handleMove]);
 
+  const handleDragStart = (e) => {
+    if (e.type === 'mousedown') {
+      e.preventDefault();
+    }
+    setIsDragging(true);
+    setAnimationComplete(true);
+  };
+
   return (
     <section className="banner-section" id="banner" ref={sectionRef}>
       <div className="banner-wrapper">
         {/* Before Layer */}
         <div className="banner-layer layer-dark">
-          <img src={beforeImage} alt="Before" className="banner-img" />
+          <div className="banner-img-container">
+            <img src={beforeImage} alt="Before" className="banner-img" draggable="false" />
+          </div>
           <div className="banner-dark-filter"></div>
         </div>
 
@@ -135,7 +172,9 @@ function BannerSection() {
           className="banner-layer layer-reveal"
           style={{ clipPath: `inset(0 ${100 - slidePosition}% 0 0)` }}
         >
-          <img src={afterImage} alt="After" className="banner-img" />
+          <div className="banner-img-container">
+            <img src={afterImage} alt="After" className="banner-img" draggable="false" />
+          </div>
           <div className="banner-content">
             <h2 className="banner-heading" ref={headingRef}>
               A Place You Love to Return To
@@ -147,16 +186,29 @@ function BannerSection() {
         <div 
           className="banner-handle"
           style={{ left: `${slidePosition}%` }}
-          onMouseDown={(e) => { e.preventDefault(); setIsDragging(true); setAnimationComplete(true); }}
-          onTouchStart={() => { setIsDragging(true); setAnimationComplete(true); }}
+          onMouseDown={handleDragStart}
+          onTouchStart={handleDragStart}
+          role="slider"
+          aria-label="Image comparison slider"
+          aria-valuenow={Math.round(slidePosition)}
+          aria-valuemin="0"
+          aria-valuemax="100"
+          tabIndex="0"
         >
           <div className="handle-line"></div>
           <div className="handle-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden="true">
               <path d="M8 18l-6-6 6-6M16 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
         </div>
+
+        {/* Mobile Instruction */}
+        {isMobile && !animationComplete && (
+          <div className="mobile-instruction">
+            Drag to Compare
+          </div>
+        )}
       </div>
     </section>
   );
