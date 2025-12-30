@@ -2,11 +2,12 @@
 
 .unified-footer-section {
   position: relative;
-  z-index: 100;
+  z-index: 500;
   background: #ffffff !important;
   padding: 80px 0;
   width: 100%;
-  overflow: clip;
+  overflow: hidden;
+  display: block; /* Ensures it takes up space in the document flow */
 }
 
 .message-container, .connect-container {
@@ -1332,12 +1333,14 @@
   .unified-footer-section {
     background: #ffffff !important;
     position: relative;
-    z-index: 10;
+    z-index: 9999; /* Force it to the very top layer on mobile */
+    margin-top: 0;
+    clear: both; /* Clears any floats from the hero */
   }
 
   .message-container,
   .connect-container {
-    background: transparent;
+    background: #ffffff !important; /* Ensure the container itself isn't transparent */
     grid-template-columns: 1fr;
   }
 }

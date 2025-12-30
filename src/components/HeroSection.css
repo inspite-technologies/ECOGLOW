@@ -1417,6 +1417,7 @@ html, body {
     width: 145px;
     height: 330px;
     margin-top: 85px;
+    pointer-events: none;
   }
 
   .card-item {
